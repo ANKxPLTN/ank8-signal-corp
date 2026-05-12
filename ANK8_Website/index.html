@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANK8 REBOOT SIGNAL CORP</title>
+    <meta name="description" content="You bought a VPS. Now what? ANK8 is your personal AI server navigator. Master infrastructure in weeks, not months. Join the early access waitlist!">
+    <meta property="og:title" content="ANK8 REBOOT SIGNAL CORP">
+    <meta property="og:description" content="Your personal AI-powered server navigator. We guide you step-by-step through setting up VPNs, bots, and nodes on your real infrastructure.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://raw.githubusercontent.com/ANKxPLTN/ank8-signal-corp/main/bg.png">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Language Switcher UI -->
+    <div class="lang-switcher">
+        <button class="lang-btn" onclick="changeLanguage('en')">[ EN ]</button>
+        <button class="lang-btn" onclick="changeLanguage('ru')">[ RU ]</button>
+    </div>
+    <!-- Hidden Google Translate Element -->
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <div class="desktop-wrapper">
+        <div class="content-full">
+            <h1 class="project-title">⚙ ANK8 REBOOT SIGNAL CORP</h1>
+            
+            <div class="intro-text">
+                <h2>You bought a server. Now what?</h2>
+                <p>You just purchased a VPS from DigitalOcean, Linode, or Hetzner. You're excited. But then reality hits: the terminal is intimidating. Documentation is technical. YouTube tutorials are boring. Discord communities are chaotic. You're lost.</p>
+                <p>This is the gap ANK8 fills.</p>
+                <p>ANK8 is not a theoretical course. It's not a game simulator. It's your personal AI-powered server navigator that connects directly to YOUR real infrastructure and guides you through every step. Want to set up a VPN? ANK8 shows you exactly which commands to run, why they matter, and what to do if something breaks. Building a Telegram bot infrastructure? ANK8 analyzes your server's current state and builds a custom roadmap just for you.</p>
+                <p>We believe mastering servers should take weeks, not months. With ANK8, you get professional-grade guidance combined with the patience of a tutor and the intelligence of an AI that understands YOUR specific setup. You stay in complete control—every command requires your confirmation. We never execute anything without you.</p>
+                <p>Choose your tier below. Register for early access. Get -50% off your first three months. Join 50+ pioneers who are already transforming how they work with infrastructure.</p>
+                <a href="docs.html" class="doc-link">[ >_ READ_DOCUMENTATION ]</a>
+            </div>
+        </div>
+
+        <div class="bottom-row">
+            <div class="live-terminal">
+                <div class="live-term-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="term-path">root@ank8-server:~</span>
+                </div>
+                <div class="live-term-body">
+                    <div class="cli-line"><span class="prompt">$ ></span> ./get_project_status.sh</div>
+                    <div class="cli-output">> PROJECT_UPTIME : <span id="days-count" class="highlight">0</span> DAYS ACTIVE</div>
+                    <div class="cli-output">> SYSTEM_CLOCK   : <span id="live-clock">00:00:00</span> UTC</div>
+                    <div class="cli-output">> EST_RELEASE    : <span class="magenta-text">2026 / 2027</span></div>
+                    <div class="cli-line blink-cursor">_</div>
+                </div>
+            </div>
+
+            <div class="usb-cta" id="usbBtn">
+                <img src="usb.png" alt="USB Registration" class="usb-img">
+                <span class="usb-tooltip">AUTHORIZE / SIGN UP</span>
+            </div>
+        </div> 
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal-overlay" id="terminalModal">
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="terminal-title">ANK8_OS://REGISTRATION_PORTAL</span>
+            </div>
+            
+            <form id="registerForm" class="terminal-body" action="https://formspree.io/f/mdabygdp" method="POST">
+                <p class="term-line">Access requested. Please provide your credentials:</p>
+                <div class="term-input-group">
+                    <label class="term-prompt">$ > email_address:</label>
+                    <input type="email" id="emailInput" name="email" required placeholder="your@email.com" autofocus>
+                </div>
+                <div class="term-input-group">
+                    <label class="term-prompt">$ > server_goal (optional):</label>
+                    <input type="text" name="server_goal" placeholder="e.g., VPN setup, Telegram bot...">
+                </div>
+                <div class="term-input-group checkbox" style="border:none; margin-top:10px;">
+                    <label style="display: flex; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" name="notify_on_launch" value="yes" id="notifyCheckbox" checked>
+                        <span class="term-prompt" style="color:#fff; font-weight:normal;">Notify me when ANK8 launches</span>
+                    </label>
+                </div>
+                <div class="term-input-group checkbox" style="border:none;">
+                    <label style="display: flex; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" name="want_discount" value="yes" id="discountCheckbox" checked>
+                        <span class="term-prompt" style="color:#fff; font-weight:normal;">Send me the -50% early access discount code</span>
+                    </label>
+                </div>
+                <div class="term-buttons">
+                    <button type="submit" class="term-btn">[🔧 INITIALIZE_REGISTRATION]</button>
+                    <button type="button" class="term-btn cancel" id="closeTerminalBtn">[ABORT_CONNECTION]</button>
+                </div>
+                <p class="term-line small" style="margin-top: 15px; font-size: 0.8rem; color: #888;">Your data will be stored securely and used only for ANK8 updates and early access information.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts for UI Logic and Translation -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
+        }
+        function changeLanguage(langCode) {
+            var selectField = document.querySelector(".goog-te-combo");
+            if(selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="main.js"></script>
+</body>
+</html>

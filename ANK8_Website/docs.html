@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANK8 // DOCUMENTATION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --green: #00FF00; --magenta: #FF006E; --black: #000000; --font: 'Ubuntu Mono', monospace; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { background-color: #000; }
+        body { font-family: var(--font); background-image: url('bg.png'); background-size: cover; background-position: center; background-attachment: fixed; color: #fff; overflow-x: hidden; }
+        
+        /* FIX GOOGLE TRANSLATE SHIFTING DOM */
+        body { top: 0 !important; }
+        .skiptranslate { display: none !important; }
+        .VIpgJd-Zvi9od-ORHb-OEVmcd { display: none !important; }
+
+        .lang-switcher { position: absolute; top: 15px; right: 20px; display: flex; gap: 10px; z-index: 1000; }
+        .lang-btn { background: rgba(0, 0, 0, 0.8); border: 1px solid var(--green); color: var(--green); padding: 5px 10px; font-family: var(--font); font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .lang-btn:hover { background: var(--green); color: var(--black); }
+
+        .desktop-wrapper { display: flex; max-width: 1400px; margin: 0 auto; padding: 60px 20px 40px 20px; height: 100vh; gap: 40px; }
+        
+        .sidebar { width: 250px; flex-shrink: 0; display: flex; flex-direction: column; gap: 15px; }
+        .back-btn { display: inline-block; color: var(--black); text-decoration: none; font-weight: bold; border: 2px solid var(--black); padding: 8px 15px; margin-bottom: 30px; transition: 0.2s; text-align: center; background: rgba(255,255,255,0.8); }
+        .back-btn:hover { background: var(--black); color: #fff; }
+        .nav-item { color: var(--black); background: rgba(255,255,255,0.8); font-size: 1.2rem; font-weight: bold; cursor: pointer; padding: 10px; border-left: 4px solid transparent; transition: 0.2s; }
+        .nav-item:hover { color: #fff; background: rgba(0,0,0,0.8); }
+        .nav-item.active { border-left: 4px solid var(--magenta); background: rgba(0, 0, 0, 0.9); color: var(--green); }
+        
+        .content-area { flex: 1; background: rgba(0, 0, 0, 0.9); border-left: 4px solid var(--magenta); padding: 40px; border-radius: 0 8px 8px 0; max-height: calc(100vh - 100px); overflow-y: auto; }
+        .doc-tab { display: none; }
+        .doc-tab.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .disclaimer-box { border: 1px solid var(--magenta); background: rgba(255, 0, 110, 0.1); padding: 20px; margin-bottom: 30px; border-left: 5px solid var(--magenta); }
+        .disclaimer-box h3 { color: var(--magenta); margin-top: 0; }
+        .disclaimer-box p { color: #fff; margin-bottom: 0; }
+
+        h1 { color: var(--green); font-size: 2.2rem; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        h2 { color: var(--magenta); font-size: 1.6rem; margin-top: 40px; margin-bottom: 15px; }
+        h3 { color: #fff; font-size: 1.2rem; margin-top: 25px; margin-bottom: 10px; }
+        h4 { color: #aaa; margin-top: 20px; margin-bottom: 10px; }
+        p { line-height: 1.6; margin-bottom: 15px; font-size: 1.1rem; color: #eee; }
+        ul, ol { margin-left: 20px; margin-bottom: 20px; color: #eee; }
+        li { margin-bottom: 8px; line-height: 1.5; font-size: 1.1rem; }
+        strong { color: #fff; }
+        hr { border: 0; border-bottom: 1px dashed #444; margin: 30px 0; }
+        pre { background: #111; border: 1px solid #333; padding: 15px; border-radius: 4px; overflow-x: auto; margin: 15px 0; color: var(--green); }
+        code { font-family: var(--font); }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #444; padding: 10px; text-align: left; }
+        th { background: #111; color: var(--magenta); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--magenta); border-radius: 4px; }
+
+        /* MOBILE FIXES */
+        @media (max-width: 900px) {
+            .desktop-wrapper { flex-direction: column; padding: 60px 15px 15px 15px; gap: 20px; height: auto; }
+            .sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .back-btn { width: 100%; margin-bottom: 10px; }
+            .nav-item { font-size: 0.9rem; padding: 8px 12px; border: 1px solid #333; border-left: none; border-radius: 4px; background: rgba(255,255,255,0.8); }
+            .nav-item.active { border: 1px solid var(--magenta); border-left: none; background: rgba(0,0,0,0.9); }
+            .content-area { width: 100%; max-height: none; overflow-y: visible; border-left: none; border-top: 4px solid var(--magenta); padding: 20px 15px; border-radius: 0 0 8px 8px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Language Switcher UI -->
+    <div class="lang-switcher">
+        <button class="lang-btn" onclick="changeLanguage('en')">[ EN ]</button>
+        <button class="lang-btn" onclick="changeLanguage('ru')">[ RU ]</button>
+    </div>
+    <!-- Hidden Google Translate Element -->
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <div class="desktop-wrapper">
+        <div class="sidebar">
+            <a href="index.html" class="back-btn"><< BACK TO MAIN</a>
+            <div class="nav-item active" onclick="switchTab('readme')">> OVERVIEW</div>
+            <div class="nav-item" onclick="switchTab('roadmap')">> ROADMAP</div>
+            <div class="nav-item" onclick="switchTab('architecture')">> ARCHITECTURE</div>
+            <div class="nav-item" onclick="switchTab('pricing')">> PRICING</div>
+        </div>
+
+        <div class="content-area" id="contentArea">
+            
+            <!-- OVERVIEW -->
+            <div id="readme" class="doc-tab active">
+                <div class="disclaimer-box">
+                    <h3>SYSTEM DISCLAIMER // THEORETICAL FRAMEWORK</h3>
+                    <p>Please note: The features, timelines, infrastructure services, and subscription tiers described in this documentation represent our theoretical vision and roadmap. While we are absolutely committed to implementing the core concept—an interactive AI-powered server agent that connects to your infrastructure and guides you—specific features, release dates, and scaling promises (such as managed hosting or enterprise-level SLAs) are subject to change and are not 100% guaranteed to be released exactly as described. This documentation outlines our ultimate goals and architecture concepts.</p>
+                </div>
+                <h1>ANK8 REBOOT SIGNAL CORP</h1>
+                <p><strong>Professional AI-Powered Server Navigation Platform</strong></p>
+                <hr>
+                <h2>Project Overview</h2>
+                <p>ANK8 is a revolutionary platform designed to bridge the gap between server infrastructure complexity and practical accessibility. We combine cutting-edge AI technology with real-world server management to create a personalized learning experience for infrastructure professionals at any skill level.</p>
+                <h3>The Problem</h3>
+                <p>Millions of developers and entrepreneurs purchase VPS (Virtual Private Server) infrastructure annually but face overwhelming barriers:</p>
+                <ul>
+                    <li><strong>Technical Documentation</strong>: Complex, intimidating, often assumes deep infrastructure knowledge</li>
+                    <li><strong>Learning Resources</strong>: Fragmented across YouTube, blogs, and community forums with inconsistent quality</li>
+                    <li><strong>Hands-On Experience</strong>: Simulator-based learning doesn't translate to real production environments</li>
+                    <li><strong>Personalization</strong>: Generic courses don't account for individual infrastructure goals</li>
+                    <li><strong>Support</strong>: Traditional support tickets are slow; communities can be chaotic</li>
+                </ul>
+                <h3>The Solution: ANK8</h3>
+                <p>ANK8 acts as your personal AI server navigator. Unlike traditional courses, ANK8:</p>
+                <ol>
+                    <li><strong>Connects directly to YOUR infrastructure</strong> - Analyzes your real server configuration</li>
+                    <li><strong>Creates personalized learning paths</strong> - Tailors guidance based on your specific goals</li>
+                    <li><strong>Provides step-by-step navigation</strong> - Clear instructions with explanations and context</li>
+                    <li><strong>Maintains complete user control</strong> - Every action requires explicit confirmation</li>
+                    <li><strong>Teaches through doing</strong> - Real infrastructure, real results, real learning</li>
+                </ol>
+                <h3>Core Philosophy</h3>
+                <p><strong>"Master infrastructure in weeks, not months."</strong></p>
+                <p>We believe that infrastructure management shouldn't be a mystery. With proper guidance and AI assistance, anyone can confidently manage production-grade servers.</p>
+                <hr>
+                <h2>Vision & Mission</h2>
+                <h3>Vision</h3>
+                <p>A world where server infrastructure is accessible, understandable, and manageable for developers at any skill level.</p>
+                <h3>Mission</h3>
+                <p>To democratize infrastructure knowledge by providing AI-powered, personalized, real-world guided learning experiences that respect user autonomy and accelerate professional growth.</p>
+                <hr>
+                <h2>Core Features</h2>
+                <h3>1. Intelligent Server Diagnostics</h3>
+                <ul>
+                    <li>Automatic server state analysis on connection</li>
+                    <li>Performance metrics and security assessment</li>
+                    <li>Environment-specific recommendations</li>
+                    <li>Real-time status monitoring</li>
+                </ul>
+                <h3>2. Personalized Learning Paths</h3>
+                <ul>
+                    <li>Goal-based curriculum selection</li>
+                    <li>Adaptive difficulty progression</li>
+                    <li>Specialized tracks for different use cases</li>
+                    <li>Flexible pacing and self-directed learning</li>
+                </ul>
+                <h3>3. Interactive Terminal Guidance</h3>
+                <ul>
+                    <li>Real command execution with confirmation</li>
+                    <li>Line-by-line explanations</li>
+                    <li>Error handling and troubleshooting</li>
+                    <li>Contextual documentation integration</li>
+                </ul>
+                <h3>4. Specialization Tracks</h3>
+                <p>Users can choose from focused learning paths:</p>
+                <ul>
+                    <li><strong>VPN Architecture</strong> - Set up secure, private network infrastructure</li>
+                    <li><strong>Telegram Bot Infrastructure</strong> - Deploy and scale bot services</li>
+                    <li><strong>Web Application Deployment</strong> - Host and manage web applications</li>
+                    <li><strong>Game Server Setup</strong> - Configure and optimize game server environments</li>
+                    <li><strong>Cryptocurrency Node Operations</strong> - Run blockchain infrastructure</li>
+                </ul>
+                <h3>5. Security-First Design</h3>
+                <ul>
+                    <li>Read-only agent model (no autonomous execution)</li>
+                    <li>Double-confirmation protocol for all commands</li>
+                    <li>Encrypted communication channels</li>
+                    <li>Comprehensive audit logging</li>
+                    <li>User-controlled data access</li>
+                </ul>
+                <hr>
+                <h2>Security & Privacy</h2>
+                <h3>Our Commitment</h3>
+                <p>ANK8 operates on a <strong>zero-autonomous-execution model</strong>:</p>
+                <ol>
+                    <li><strong>Read-Only Agent</strong> - Server sensor collects information only</li>
+                    <li><strong>Confirmation Protocol</strong> - User must explicitly approve all actions</li>
+                    <li><strong>Encrypted Communication</strong> - All data encrypted in transit</li>
+                    <li><strong>Audit Logging</strong> - Complete activity history maintained</li>
+                    <li><strong>Data Ownership</strong> - Users control what ANK8 can access</li>
+                    <li><strong>No Backdoors</strong> - No hidden execution paths or privileged access</li>
+                </ol>
+                <h3>Compliance</h3>
+                <ul>
+                    <li>GDPR compliant data handling</li>
+                    <li>No personal data sold or shared</li>
+                    <li>Regular security audits</li>
+                    <li>Transparent data practices</li>
+                    <li>User consent-based operations</li>
+                </ul>
+            </div>
+
+            <!-- ROADMAP -->
+            <div id="roadmap" class="doc-tab">
+                <h1>ANK8 Product Roadmap</h1>
+                <p><strong>Vision for 2026-2027 and Beyond</strong></p>
+                <hr>
+                <h2>Executive Summary</h2>
+                <p>ANK8 is more than a learning platform—it's the foundation of a complete infrastructure services ecosystem. This document outlines our product vision, planned features, and strategic initiatives for the next 24 months and beyond.</p>
+                <hr>
+                <h2>Phase 1: Foundation & Launch (2026 Q1)</h2>
+                <h3>Public Beta Launch</h3>
+                <h4>Core Platform Deployment</h4>
+                <ul>
+                    <li>Learning platform infrastructure</li>
+                    <li>4 subscription tiers</li>
+                    <li>Server agent installation and management</li>
+                    <li>Basic server diagnostics and monitoring</li>
+                </ul>
+                <h4>Initial Specializations (2 Available)</h4>
+                <ol>
+                    <li><strong>VPN Architecture</strong>
+                        <ul><li>WireGuard and OpenVPN setup</li><li>Single-server VPN deployment</li></ul>
+                    </li>
+                    <li><strong>Telegram Bot Infrastructure</strong>
+                        <ul><li>Bot API fundamentals</li><li>Webhook configuration</li></ul>
+                    </li>
+                </ol>
+                <hr>
+                <h2>Phase 2: Expansion & Specializations (2026 Q2-Q3)</h2>
+                <h3>Additional Learning Tracks</h3>
+                <p><strong>3. Web Application Deployment</strong></p>
+                <p><strong>4. Game Server Configuration</strong></p>
+                <p><strong>5. Cryptocurrency Node Operations</strong></p>
+                <h3>Managed Hosting Beta (Q3 2026: July - September)</h3>
+                <p>ANK8 is expanding beyond education into infrastructure services. We're preparing a managed hosting offering.</p>
+                <pre><code>ANK8 Managed = Learning Platform + Infrastructure Service</code></pre>
+                <hr>
+                <h2>Phase 3: Intelligence & Automation (2026 Q4)</h2>
+                <h3>Advanced AI Features</h3>
+                <ul>
+                    <li>Predictive Intelligence (Predict performance bottlenecks)</li>
+                    <li>Automated Troubleshooting (Error detection and analysis)</li>
+                    <li>Natural Language Interface (Ask questions in plain English)</li>
+                </ul>
+            </div>
+
+            <!-- ARCHITECTURE -->
+            <div id="architecture" class="doc-tab">
+                <h1>System Architecture</h1>
+                <p><strong>Technical Overview & Infrastructure Design</strong></p>
+                <hr>
+                <h2>System Architecture Overview</h2>
+                <pre><code>
+┌─────────────────────────────────────────────────────────────┐
+│                    ANK8 CLOUD PLATFORM                      │
+│  ┌──────────────────┐  ┌──────────────────┐                 │
+│  │  Learning Engine │  │  AI Coordination │                 │
+│  └──────────────────┘  └──────────────────┘                 │
+└─────────────────────────────────────────────────────────────┘
+                          ▲
+                          │ Encrypted API
+                          │
+┌─────────────────────────────────────────────────────────────┐
+│              USER'S VPS / INFRASTRUCTURE                    │
+│  ┌──────────────────────────────────────────────┐           │
+│  │  ANK8 Server Agent (Installed on VPS)        │           │
+│  │  - Server Diagnostics                        │           │
+│  │  - Command Executor (Read-Only)              │           │
+│  │  - Secure Communication Layer                │           │
+│  └──────────────────────────────────────────────┘           │
+└─────────────────────────────────────────────────────────────┘
+                </code></pre>
+                <h2>Core Components</h2>
+                <h3>1. Learning Engine</h3>
+                <p>The brain of ANK8. Manages curriculum delivery, tracks user progress, and generates personalized recommendations.</p>
+                <h3>2. AI Coordination System</h3>
+                <p>Processes queries, provides explanations, and generates guidance with NLP.</p>
+                <h3>3. Server Agent</h3>
+                <p>Deployed directly on user's VPS, the Server Agent is the "eyes and ears" of ANK8.</p>
+                <pre><code># Single command installation
+curl -sSL https://install.ankverdict.io/agent | bash</code></pre>
+                <h4>Agent Limitations (Intentional Security):</h4>
+                <ul>
+                    <li>[ALLOWED] Can read system files & analyze configurations</li>
+                    <li>[ALLOWED] Can observe commands</li>
+                    <li>[DENIED] Cannot modify files or execute commands autonomously</li>
+                    <li>[DENIED] Cannot install packages without user confirmation</li>
+                </ul>
+            </div>
+
+            <!-- PRICING -->
+            <div id="pricing" class="doc-tab">
+                <h1>ANK8 Subscription Tiers</h1>
+                <p><strong>Detailed Guide</strong></p>
+                <hr>
+                <h2>Overview: Finding Your Perfect Fit</h2>
+                <p>ANK8 offers four carefully designed subscription tiers, each crafted for specific skill levels and infrastructure goals.</p>
+                <h3>Quick Comparison Matrix</h3>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>SIGNAL INITIATOR</th>
+                        <th>REBOOT OPERATOR</th>
+                        <th>SIGNAL ARCHITECT</th>
+                        <th>ANK8 ENTERPRISE</th>
+                    </tr>
+                    <tr><td>Price</td><td>$3/month</td><td>$8/month</td><td>$18/month</td><td>$35/month</td></tr>
+                    <tr><td>Server Connections</td><td>1</td><td>2</td><td>4</td><td>Unlimited</td></tr>
+                    <tr><td>Specializations</td><td>-</td><td>5 available</td><td>5 available</td><td>5+ available</td></tr>
+                    <tr><td>AI Availability</td><td>12h/day</td><td>24/7</td><td>24/7</td><td>24/7</td></tr>
+                </table>
+                <hr>
+                <h2>SIGNAL INITIATOR — $3/month</h2>
+                <p><strong>Accessible Entry Point for Curious Beginners</strong></p>
+                <p>Removes all barriers to entry. Perfect for complete beginners to VPS, students, and hobby projects.</p>
+                <hr>
+                <h2>REBOOT OPERATOR — $8/month ⭐ MOST POPULAR</h2>
+                <p><strong>Professional-Grade Guidance for Project Builders</strong></p>
+                <p>This is where theory meets practice. Take real projects from concept to production.</p>
+                <hr>
+                <h2>SIGNAL ARCHITECT — $18/month</h2>
+                <p><strong>Production-Grade Infrastructure Mastery</strong></p>
+                <p>For professionals serious about infrastructure excellence. Scaling and multi-server operations.</p>
+                <hr>
+                <h2>ANK8 ENTERPRISE — $35/month</h2>
+                <p><strong>Complete Infrastructure Mastery for Organizations</strong></p>
+                <p>When infrastructure directly impacts your bottom line, excellence isn't optional.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for Tabs and Neural Network Translation -->
+    <script type="text/javascript">
+        function switchTab(tabId) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.doc-tab').forEach(tab => tab.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('contentArea').scrollTop = 0;
+        }
+
+        // Google Translate Init
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
+        }
+        
+        // Custom Language Switcher Function
+        function changeLanguage(langCode) {
+            var selectField = document.querySelector(".goog-te-combo");
+            if(selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
