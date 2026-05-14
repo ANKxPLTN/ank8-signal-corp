@@ -1,43 +1,61 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', function() {
 
-    // 1. СЕКУНДОМЕР ПРОЕКТА (STOPWATCH)
-    // Укажи здесь точную дату, когда ты начал проект (Год-Месяц-День T Время)
-    // Сейчас стоит 1 декабря 2024 года, 12:00
-    const projectStartDate = new Date('2026-05-01T12:00:00Z'); 
-
-    function updateStopwatch() {
-        const now = new Date();
-        const diff = now.getTime() - projectStartDate.getTime();
-
-        // Считаем прошедшее время
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24).toString().padStart(2, '0');
-        const minutes = Math.floor((diff / 1000 / 60) % 60).toString().padStart(2, '0');
-        const seconds = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
-
-        // Выводим в HTML
-        document.getElementById('days-count').innerText = days;
-        document.getElementById('live-clock').innerText = `${hours}:${minutes}:${seconds}`;
-    }
+    // ========== 1. ТАЙМЕР ==========
+    const projectStartDate = new Date('2026-05-01T00:00:00Z');
     
-    // Обновляем секундомер каждую секунду
-    setInterval(updateStopwatch, 1000);
-    updateStopwatch();
+    function updateTimer() {
+        const now = new Date();
+        
+        // Дни активности
+        const daysActive = Math.floor((now - projectStartDate) / (1000 * 60 * 60 * 24));
+        const daysElement = document.getElementById('days-count');
+        if (daysElement) daysElement.textContent = daysActive;
+        
+        // Текущее время UTC
+        const hours = String(now.getUTCHours()).padStart(2, '0');
+        const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+        
+        const clockElement = document.getElementById('live-clock');
+        if (clockElement) clockElement.textContent = ${hours}:${minutes}:${seconds};
+    }
 
-    // 2. ОТКРЫТИЕ ОКНА АВТОРИЗАЦИИ
+    // Обновляем таймер сразу и каждую секунду
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
+    // ========== 2. МОДАЛЬНОЕ ОКНО ==========
     const modal = document.getElementById('terminalModal');
     const usbBtn = document.getElementById('usbBtn');
     const closeBtn = document.getElementById('closeTerminalBtn');
 
-    function openTerminal() {
-        modal.style.display = 'flex';
-        document.getElementById('emailInput').focus();
+    if (modal && usbBtn && closeBtn) {
+        function openTerminal() {
+            modal.style.display = 'flex';
+            const emailInput = document.getElementById('emailInput');
+            if (emailInput) emailInput.focus();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTerminal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        usbBtn.addEventListener('click', openTerminal);
+        closeBtn.addEventListener('click', closeTerminal);
+
+        // Закрыть при клике на фон
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeTerminal();
+        });
+
+        // Закрыть на Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                closeTerminal();
+            }
+        });
     }
 
-    function closeTerminal() {
-        modal.style.display = 'none';
-    }
-
-    usbBtn.addEventListener('click', openTerminal);
-    closeBtn.addEventListener('click', closeTerminal);
 });
