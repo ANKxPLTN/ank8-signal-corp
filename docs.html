@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ANK8 // DOCUMENTATION</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -22,115 +22,92 @@
         html, body {
             width: 100%;
             height: 100%;
+            overflow: hidden;
         }
 
         body {
             font-family: var(--font);
-            background: linear-gradient(135deg, #0A0E27 0%, #1a1f3a 100%);
             background-image: url('bg.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: #fff;
-            overflow-x: hidden;
+            display: flex;
         }
 
-        .wrapper {
-            min-height: 100vh;
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.8);
+            border-right: 2px solid var(--magenta);
+            padding: 20px;
             display: flex;
             flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+            flex-shrink: 0;
         }
 
-        /* HEADER */
-        .header {
-            padding: 30px 20px;
-            text-align: center;
-            border-bottom: 2px solid var(--magenta);
-        }
-
-        .header h1 {
-            font-size: 2.2rem;
-            color: var(--green);
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px var(--green);
-        }
-
-        .back-link {
-            display: inline-block;
-            color: var(--magenta);
-            text-decoration: none;
-            font-size: 0.9rem;
-            border: 1px solid var(--magenta);
-            padding: 8px 15px;
-            margin-top: 15px;
-            transition: all 0.3s;
-            border-radius: 3px;
-        }
-
-        .back-link:hover {
-            background: var(--magenta);
-            color: var(--black);
-        }
-
-        /* NAV TABS */
-        .nav-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0;
-            background: rgba(0, 0, 0, 0.6);
-            border-bottom: 2px solid var(--magenta);
-            padding: 0;
-            margin: 0;
-        }
-
-        .nav-tab {
-            flex: 1;
-            min-width: 150px;
-            padding: 15px 20px;
-            border: none;
+        .back-btn {
             background: transparent;
-            color: #aaa;
+            border: 2px solid var(--black);
+            color: var(--black);
+            padding: 10px 15px;
             font-family: var(--font);
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
+            border-radius: 3px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .back-btn:hover {
+            background: var(--black);
+            color: #fff;
+        }
+
+        .nav-item {
+            background: transparent;
+            border: none;
+            border-left: 4px solid transparent;
+            color: #aaa;
+            padding: 12px 10px;
+            font-family: var(--font);
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
             font-size: 1rem;
+            text-align: left;
         }
 
-        .nav-tab:hover {
+        .nav-item:hover {
             color: var(--green);
             background: rgba(0, 255, 0, 0.05);
         }
 
-        .nav-tab.active {
+        .nav-item.active {
+            border-left: 4px solid var(--magenta);
             color: var(--green);
-            border-bottom-color: var(--green);
             background: rgba(0, 255, 0, 0.05);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
         }
 
         /* CONTENT */
         .content-wrapper {
             flex: 1;
-            display: flex;
-            overflow: hidden;
-        }
-
-        .content-area {
-            flex: 1;
             overflow-y: auto;
             padding: 40px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .doc-section {
             display: none;
+            animation: fadeIn 0.3s;
         }
 
         .doc-section.active {
             display: block;
-            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
@@ -139,63 +116,63 @@
         }
 
         /* TYPOGRAPHY */
-        .doc-section h1 {
+        h1 {
             font-size: 2.2rem;
             color: var(--green);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-shadow: 0 0 10px var(--green);
             border-bottom: 2px solid #333;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
         }
 
-        .doc-section h2 {
-            font-size: 1.6rem;
+        h2 {
+            font-size: 1.5rem;
             color: var(--magenta);
-            margin-top: 40px;
-            margin-bottom: 20px;
-            padding-top: 20px;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            padding-top: 15px;
             border-top: 1px dashed #444;
         }
 
-        .doc-section h3 {
-            font-size: 1.2rem;
+        h3 {
+            font-size: 1.1rem;
             color: #fff;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        .doc-section h4 {
-            font-size: 1rem;
-            color: #aaa;
-            margin-top: 15px;
+            margin-top: 20px;
             margin-bottom: 10px;
         }
 
-        .doc-section p {
+        h4 {
+            font-size: 0.95rem;
+            color: #aaa;
+            margin-top: 12px;
+            margin-bottom: 8px;
+        }
+
+        p {
             font-size: 1rem;
             line-height: 1.7;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: #ddd;
         }
 
-        .doc-section ul, .doc-section ol {
+        ul, ol {
             margin-left: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
-        .doc-section li {
+        li {
             font-size: 0.95rem;
             line-height: 1.6;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #ccc;
         }
 
-        .doc-section strong {
+        strong {
             color: var(--green);
             font-weight: bold;
         }
 
-        .doc-section code {
+        code {
             background: #111;
             padding: 2px 6px;
             border-radius: 3px;
@@ -203,7 +180,7 @@
             font-size: 0.9rem;
         }
 
-        .doc-section pre {
+        pre {
             background: #111;
             border: 1px solid #333;
             padding: 15px;
@@ -215,46 +192,47 @@
             line-height: 1.5;
         }
 
-        .doc-section table {
+        table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 0.95rem;
+            margin: 15px 0;
+            font-size: 0.9rem;
         }
 
-        .doc-section th, .doc-section td {
+        th, td {
             border: 1px solid #444;
-            padding: 12px;
+            padding: 10px;
             text-align: left;
         }
 
-        .doc-section th {
+        th {
             background: #111;
             color: var(--magenta);
             font-weight: bold;
         }
 
-        .doc-section td {
+        td {
             color: #ccc;
         }
 
         .disclaimer-box {
             border: 2px solid var(--magenta);
             background: rgba(255, 0, 110, 0.1);
-            padding: 20px;
-            margin-bottom: 30px;
+            padding: 15px;
+            margin-bottom: 25px;
             border-radius: 4px;
         }
 
         .disclaimer-box h3 {
             color: var(--magenta);
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .disclaimer-box p {
             color: #ddd;
             margin-bottom: 0;
+            font-size: 0.95rem;
         }
 
         /* SCROLLBAR */
@@ -263,7 +241,7 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
+            background: transparent;
         }
 
         ::-webkit-scrollbar-thumb {
@@ -277,140 +255,132 @@
 
         /* MOBILE */
         @media (max-width: 1024px) {
-            .header {
-                padding: 20px 15px;
+            body {
+                flex-direction: column;
             }
 
-            .header h1 {
-                font-size: 1.8rem;
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 2px solid var(--magenta);
+                padding: 15px;
+                display: grid;
+                grid-template-columns: auto 1fr 1fr 1fr 1fr;
+                gap: 10px;
             }
 
-            .nav-tabs {
-                gap: 0;
+            .back-btn {
+                grid-column: 1;
+                padding: 8px 12px;
+                font-size: 0.85rem;
             }
 
-            .nav-tab {
-                min-width: 120px;
-                padding: 12px 15px;
+            .nav-item {
+                padding: 8px 10px;
                 font-size: 0.9rem;
+                border-bottom: 3px solid transparent;
+                border-left: none;
+                margin-bottom: 0;
             }
 
-            .content-area {
+            .nav-item.active {
+                border-bottom: 3px solid var(--magenta);
+                border-left: none;
+            }
+
+            .content-wrapper {
                 padding: 25px;
             }
 
-            .doc-section h1 {
+            h1 {
                 font-size: 1.8rem;
             }
 
-            .doc-section h2 {
+            h2 {
                 font-size: 1.3rem;
-                margin-top: 30px;
-            }
-
-            .doc-section p {
-                font-size: 0.95rem;
             }
         }
 
         @media (max-width: 768px) {
-            .header {
-                padding: 15px 10px;
-                border-bottom: 1px solid var(--magenta);
+            .sidebar {
+                grid-template-columns: 1fr;
+                padding: 12px;
+                gap: 8px;
             }
 
-            .header h1 {
-                font-size: 1.5rem;
-                margin-bottom: 8px;
-            }
-
-            .back-link {
+            .back-btn {
+                grid-column: unset;
+                padding: 6px 10px;
                 font-size: 0.8rem;
-                padding: 6px 12px;
-                margin-top: 10px;
             }
 
-            .nav-tabs {
-                flex-direction: column;
-                border-bottom: 1px solid var(--magenta);
+            .nav-item {
+                padding: 8px;
+                font-size: 0.85rem;
             }
 
-            .nav-tab {
-                min-width: unset;
-                padding: 12px 15px;
-                border-bottom: 1px solid #333;
-                border-right: 3px solid transparent;
-                font-size: 0.9rem;
-            }
-
-            .nav-tab.active {
-                border-bottom: 1px solid #333;
-                border-right: 3px solid var(--green);
-            }
-
-            .content-area {
+            .content-wrapper {
                 padding: 15px;
-                font-size: 0.9rem;
             }
 
-            .doc-section h1 {
-                font-size: 1.4rem;
-                margin-bottom: 8px;
-                padding-bottom: 10px;
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+                padding-bottom: 8px;
             }
 
-            .doc-section h2 {
+            h2 {
                 font-size: 1.1rem;
                 margin-top: 20px;
-                margin-bottom: 12px;
-                padding-top: 15px;
-            }
-
-            .doc-section h3 {
-                font-size: 1rem;
-                margin-top: 15px;
                 margin-bottom: 10px;
+                padding-top: 10px;
             }
 
-            .doc-section p {
+            h3 {
+                font-size: 1rem;
+                margin-top: 12px;
+            }
+
+            p {
                 font-size: 0.9rem;
                 line-height: 1.6;
                 margin-bottom: 10px;
             }
 
-            .doc-section li {
+            li {
                 font-size: 0.9rem;
-                margin-bottom: 6px;
+                margin-bottom: 4px;
             }
 
-            .doc-section ul, .doc-section ol {
+            ul, ol {
                 margin-left: 15px;
                 margin-bottom: 10px;
             }
 
-            .doc-section pre {
+            pre {
                 padding: 10px;
                 font-size: 0.8rem;
                 margin: 10px 0;
             }
 
-            .doc-section table {
+            table {
                 font-size: 0.85rem;
-                margin: 15px 0;
+                margin: 10px 0;
             }
 
-            .doc-section th, .doc-section td {
+            th, td {
                 padding: 8px;
             }
 
             .disclaimer-box {
-                padding: 15px;
-                margin-bottom: 20px;
+                padding: 12px;
+                margin-bottom: 15px;
             }
 
             .disclaimer-box h3 {
                 font-size: 0.95rem;
-                margin-bottom: 8px;
+                margin-bottom: 6px;
             }
 
             .disclaimer-box p {
@@ -419,464 +389,388 @@
         }
 
         @media (max-width: 480px) {
-            .wrapper {
-                min-height: 100vh;
+            .sidebar {
+                grid-template-columns: 1fr;
+                padding: 10px;
+                gap: 6px;
             }
 
-            .header {
-                padding: 12px 8px;
+            .back-btn {
+                padding: 6px 8px;
+                font-size: 0.75rem;
             }
 
-            .header h1 {
-                font-size: 1.3rem;
-            }
-
-            .nav-tabs {
-                gap: 0;
-            }
-
-            .nav-tab {
-                padding: 10px 12px;
+            .nav-item {
+                padding: 6px;
                 font-size: 0.8rem;
             }
 
-            .content-area {
-                padding: 12px;
+            .content-wrapper {
+                padding: 10px;
             }
 
-            .doc-section h1 {
-                font-size: 1.2rem;
-                margin-bottom: 6px;
-                padding-bottom: 8px;
+            h1 {
+                font-size: 1.3rem;
+                margin-bottom: 8px;
+                padding-bottom: 6px;
             }
 
-            .doc-section h2 {
+            h2 {
                 font-size: 1rem;
                 margin-top: 15px;
-                margin-bottom: 10px;
-                padding-top: 10px;
             }
 
-            .doc-section h3 {
-                font-size: 0.95rem;
-                margin-top: 12px;
-                margin-bottom: 8px;
-            }
-
-            .doc-section p {
+            p {
                 font-size: 0.85rem;
                 line-height: 1.5;
-                margin-bottom: 8px;
             }
 
-            .doc-section li {
+            li {
                 font-size: 0.85rem;
-                margin-bottom: 4px;
             }
 
-            .doc-section pre {
+            pre {
                 padding: 8px;
-                font-size: 0.75rem;
-                margin: 8px 0;
+                font-size: 0.7rem;
             }
 
-            .doc-section table {
+            table {
                 font-size: 0.75rem;
-            }
-
-            .doc-section th, .doc-section td {
-                padding: 6px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <div class="header">
-            <h1>⚙ ANK8 DOCUMENTATION</h1>
-            <a href="index.html" class="back-link"><< BACK TO MAIN</a>
-        </div>
+    <div class="sidebar">
+        <button class="back-btn" onclick="window.location.href='index.html'"><< BACK</button>
+        <button class="nav-item active" onclick="switchTab(0)">> OVERVIEW</button>
+        <button class="nav-item" onclick="switchTab(1)">> ROADMAP</button>
+        <button class="nav-item" onclick="switchTab(2)">> ARCHITECTURE</button>
+        <button class="nav-item" onclick="switchTab(3)">> PRICING</button>
+    </div>
 
-        <div class="nav-tabs">
-            <button class="nav-tab active" onclick="switchTab(0)">> OVERVIEW</button>
-            <button class="nav-tab" onclick="switchTab(1)">> ROADMAP</button>
-            <button class="nav-tab" onclick="switchTab(2)">> ARCHITECTURE</button>
-            <button class="nav-tab" onclick="switchTab(3)">> PRICING</button>
-        </div>
+    <div class="content-wrapper">
 
-        <div class="content-wrapper">
-            <div class="content-area">
-
-                <!-- OVERVIEW -->
-                <div id="tab-0" class="doc-section active">
-                    <div class="disclaimer-box">
-                        <h3>SYSTEM DISCLAIMER // THEORETICAL FRAMEWORK</h3>
-                        <p>Please note: The features, timelines, infrastructure services, and subscription tiers described in this documentation represent our theoretical vision and roadmap. While we are absolutely committed to implementing the core concept—an interactive AI-powered server agent that connects to your infrastructure and guides you—specific features, release dates, and scaling promises are subject to change and are not 100% guaranteed to be released exactly as described. This documentation outlines our ultimate goals and architecture concepts.</p>
-                    </div>
-
-                    <h1>ANK8 REBOOT SIGNAL CORP</h1>
-                    <p><strong>Professional AI-Powered Server Navigation Platform</strong></p>
-
-                    <h2>Project Overview</h2>
-                    <p>ANK8 is a revolutionary platform designed to bridge the gap between server infrastructure complexity and practical accessibility. We combine cutting-edge AI technology with real-world server management to create a personalized learning experience for infrastructure professionals at any skill level.</p>
-
-                    <h2>The Problem We Solve</h2>
-                    <p>You just bought a VPS. You're excited. But then reality hits:</p>
-                    <ul>
-                        <li><strong>Terminal is intimidating</strong> - Complex commands, cryptic error messages</li>
-                        <li><strong>Documentation is overwhelming</strong> - Technical, assumes deep knowledge</li>
-                        <li><strong>YouTube tutorials are fragmented</strong> - Inconsistent quality, outdated info</li>
-                        <li><strong>Communities are chaotic</strong> - Noise, misinformation, slow responses</li>
-                        <li><strong>No hands-on experience</strong> - Simulators don't match real production</li>
-                    </ul>
-
-                    <h2>Our Solution</h2>
-                    <p>ANK8 is your personal AI server navigator:</p>
-                    <pre>Your VPS + ANK8 Agent = Personalized Guidance + Real Learning</pre>
-                    <ul>
-                        <li>✅ Connects to YOUR real infrastructure</li>
-                        <li>✅ Analyzes YOUR specific configuration</li>
-                        <li>✅ Creates YOUR personalized learning path</li>
-                        <li>✅ Guides every step with explanations</li>
-                        <li>✅ Maintains YOUR complete control</li>
-                    </ul>
-
-                    <h2>Core Features</h2>
-                    <h3>1. Intelligent Server Diagnostics</h3>
-                    <ul>
-                        <li>Automatic analysis of server's state on connection</li>
-                        <li>Performance metrics and security assessment</li>
-                        <li>Environment-specific recommendations</li>
-                        <li>Real-time status monitoring</li>
-                    </ul>
-
-                    <h3>2. Personalized Learning Paths</h3>
-                    <ul>
-                        <li>AI-generated curriculum tailored to your goals</li>
-                        <li>Adaptive difficulty progression</li>
-                        <li>Specialized tracks for different use cases</li>
-                        <li>Flexible pacing and self-directed learning</li>
-                    </ul>
-
-                    <h3>3. Interactive Terminal Guidance</h3>
-                    <ul>
-                        <li>Step-by-step command execution with explanations</li>
-                        <li>Error handling and troubleshooting</li>
-                        <li>Contextual documentation integration</li>
-                        <li>Real infrastructure learning</li>
-                    </ul>
-
-                    <h3>4. Specialization Tracks</h3>
-                    <p>Choose your learning focus:</p>
-                    <ul>
-                        <li><strong>🔐 VPN Architecture</strong> - Secure network infrastructure</li>
-                        <li><strong>🤖 Telegram Bot Infrastructure</strong> - Deploy and scale bots</li>
-                        <li><strong>🌐 Web Application Deployment</strong> - Host production apps</li>
-                        <li><strong>🎮 Game Server Setup</strong> - Configure game infrastructure</li>
-                        <li><strong>₿ Cryptocurrency Node Operations</strong> - Run blockchain infrastructure</li>
-                    </ul>
-
-                    <h3>5. Security-First Design</h3>
-                    <ul>
-                        <li>Read-only agent model (no autonomous execution)</li>
-                        <li>Double-confirmation protocol for all actions</li>
-                        <li>Encrypted communication (TLS 1.3)</li>
-                        <li>Complete audit logging</li>
-                        <li>User-controlled data access</li>
-                    </ul>
-
-                    <h2>Security & Privacy</h2>
-                    <h3>Our Commitment</h3>
-                    <p>ANK8 operates on a <strong>zero-autonomous-execution model</strong>:</p>
-                    <ol>
-                        <li><strong>Read-Only Agent</strong> - Only observes, never executes autonomously</li>
-                        <li><strong>User Confirmation</strong> - Every action requires explicit approval</li>
-                        <li><strong>Encrypted Communication</strong> - TLS 1.3 end-to-end encryption</li>
-                        <li><strong>Audit Logging</strong> - Complete activity history maintained</li>
-                        <li><strong>Data Ownership</strong> - You control what ANK8 can access</li>
-                    </ol>
-
-                    <h3>Compliance</h3>
-                    <ul>
-                        <li>GDPR compliant data handling</li>
-                        <li>No personal data sold or shared</li>
-                        <li>Regular security audits</li>
-                        <li>Transparent privacy practices</li>
-                        <li>User consent-based operations</li>
-                    </ul>
-
-                    <h2>Learning Methodology</h2>
-                    <h3>Pedagogical Approach</h3>
-                    <p>ANK8 uses a <strong>guided discovery</strong> model:</p>
-                    <ol>
-                        <li><strong>Context First</strong> - Understand the "why" before the "how"</li>
-                        <li><strong>Real Hands-On</strong> - Work with actual infrastructure, not simulators</li>
-                        <li><strong>Progressive Complexity</strong> - Build skills systematically</li>
-                        <li><strong>Immediate Application</strong> - Learn by doing on real projects</li>
-                        <li><strong>Adaptive Pacing</strong> - Move at your own speed</li>
-                    </ol>
-
-                    <h3>Success Metrics</h3>
-                    <p>Users typically:</p>
-                    <ul>
-                        <li>Deploy their first service within <strong>2-4 weeks</strong></li>
-                        <li>Gain confidence in terminal usage within <strong>1 week</strong></li>
-                        <li>Troubleshoot common issues independently within <strong>3-6 weeks</strong></li>
-                        <li>Manage production infrastructure within <strong>2-3 months</strong></li>
-                    </ul>
-
-                    <h2>Vision & Mission</h2>
-                    <h3>Vision</h3>
-                    <p>A world where server infrastructure is accessible, understandable, and manageable for developers at any skill level.</p>
-
-                    <h3>Mission</h3>
-                    <p>To democratize infrastructure knowledge by providing AI-powered, personalized, real-world guided learning experiences that respect user autonomy and accelerate professional growth.</p>
-
-                    <h2>Business Model</h2>
-                    <h3>Revenue Streams (Planned)</h3>
-                    <ol>
-                        <li><strong>Subscription Plans</strong> - Core revenue (70%)</li>
-                        <li><strong>Enterprise Services</strong> - Custom implementations (20%)</li>
-                        <li><strong>Certification Programs</strong> - Verified skill credentials (5%)</li>
-                        <li><strong>Premium Add-ons</strong> - Advanced features, consulting (5%)</li>
-                    </ol>
-
-                    <h3>Pricing Strategy</h3>
-                    <ul>
-                        <li>Accessible entry point ($3/month for beginners)</li>
-                        <li>Value-based tier progression</li>
-                        <li>Early-bird discounts (50% off first 3 months)</li>
-                        <li>Team and annual discounts</li>
-                        <li>Money-back guarantee (first 7 days)</li>
-                    </ul>
-                </div>
-
-                <!-- ROADMAP -->
-                <div id="tab-1" class="doc-section">
-                    <h1>ANK8 Product Roadmap</h1>
-                    <p><strong>Vision for 2026-2027 and Beyond</strong></p>
-
-                    <h2>Executive Summary</h2>
-                    <p>ANK8 is more than a learning platform—it's the foundation of a complete infrastructure services ecosystem. This document outlines our product vision, planned features, and strategic initiatives for the next 24 months and beyond.</p>
-
-                    <h2>Phase 1: Foundation & Launch (2026 Q1)</h2>
-                    <p><strong>Public Beta Launch: January - March 2026</strong></p>
-
-                    <h3>Core Platform Deployment</h3>
-                    <ul>
-                        <li>Learning platform infrastructure</li>
-                        <li>4 subscription tiers</li>
-                        <li>Server agent installation and management</li>
-                        <li>Basic server diagnostics and monitoring</li>
-                        <li>User dashboard and progress tracking</li>
-                        <li>Community forum and peer support</li>
-                    </ul>
-
-                    <h3>Initial Specializations</h3>
-                    <h4>1. VPN Architecture</h4>
-                    <ul>
-                        <li>WireGuard and OpenVPN setup</li>
-                        <li>Single-server VPN deployment</li>
-                        <li>Client configuration and distribution</li>
-                        <li>Basic troubleshooting</li>
-                    </ul>
-
-                    <h4>2. Telegram Bot Infrastructure</h4>
-                    <ul>
-                        <li>Bot API fundamentals</li>
-                        <li>Webhook configuration</li>
-                        <li>Basic database integration</li>
-                        <li>Single-bot deployment</li>
-                    </ul>
-
-                    <h2>Phase 2: Expansion (2026 Q2-Q3)</h2>
-                    <h3>Additional Specializations</h3>
-                    <ul>
-                        <li><strong>Web Application Deployment</strong> - Nginx, Apache, SSL/TLS</li>
-                        <li><strong>Game Server Configuration</strong> - Minecraft, CS2, Rust</li>
-                        <li><strong>Crypto Node Operations</strong> - Bitcoin, Ethereum, validators</li>
-                    </ul>
-
-                    <h3>Managed Hosting Beta (Q3 2026)</h3>
-                    <p>ANK8 Managed Infrastructure with pre-configured VPS and integrated learning.</p>
-
-                    <h2>Phase 3: Intelligence (2026 Q4)</h2>
-                    <ul>
-                        <li>Predictive recommendations</li>
-                        <li>Automated troubleshooting</li>
-                        <li>Infrastructure insights dashboard</li>
-                        <li>Automation framework</li>
-                    </ul>
-
-                    <h2>Phase 4: Enterprise (2027)</h2>
-                    <ul>
-                        <li>Custom specialization development</li>
-                        <li>Managed services expansion</li>
-                        <li>Advanced compliance (HIPAA, PCI-DSS)</li>
-                    </ul>
-
-                    <h2>Phase 5: Ecosystem (2027+)</h2>
-                    <ul>
-                        <li>Community marketplace</li>
-                        <li>User-created specializations</li>
-                        <li>Certified expert program</li>
-                    </ul>
-
-                    <h2>Financial Projections</h2>
-                    <h3>2027 Targets</h3>
-                    <ul>
-                        <li>100,000+ users</li>
-                        <li>$1,000,000+ monthly revenue</li>
-                        <li>Profitability achieved</li>
-                        <li>15+ employees</li>
-                    </ul>
-                </div>
-
-                <!-- ARCHITECTURE -->
-                <div id="tab-2" class="doc-section">
-                    <h1>ANK8 System Architecture</h1>
-                    <p><strong>Technical Overview & Infrastructure Design</strong></p>
-
-                    <h2>Core Components</h2>
-
-                    <h3>1. Learning Engine</h3>
-                    <p>Manages curriculum delivery, tracks user progress, generates recommendations.</p>
-
-                    <h3>2. AI Coordination System</h3>
-                    <p>Processes queries, provides explanations. Read-only analysis only, no autonomous execution.</p>
-
-                    <h3>3. Server Agent</h3>
-                    <p>Deployed on user's VPS via: <code>curl -sSL https://install.ankverdict.io/agent | bash</code></p>
-                    <p><strong>Can:</strong> Read files, observe commands, analyze configurations</p>
-                    <p><strong>Cannot:</strong> Modify files, execute commands, install packages</p>
-
-                    <h3>4. Data Storage</h3>
-                    <p>User data encrypted at rest with AES-256. Infrastructure data includes hardware specs.</p>
-
-                    <h3>5. Audit Logging</h3>
-                    <p>Every action logged. 90 days hot storage, 1 year archive, 7 years legal hold.</p>
-
-                    <h2>Security Architecture</h2>
-                    <h3>Defense-in-Depth</h3>
-                    <ul>
-                        <li>Layer 1: Network Security (VPC, DDoS protection)</li>
-                        <li>Layer 2: Application Security (Input validation)</li>
-                        <li>Layer 3: Data Security (AES-256, TLS 1.3)</li>
-                        <li>Layer 4: Agent Security (Code signing)</li>
-                    </ul>
-
-                    <h2>Technology Stack</h2>
-                    <ul>
-                        <li><strong>Backend:</strong> Python 3.11+, FastAPI, PostgreSQL + Redis</li>
-                        <li><strong>Frontend:</strong> React 18+, Redux, Material-UI</li>
-                        <li><strong>Agent:</strong> Go (compiled, <10MB)</li>
-                        <li><strong>DevOps:</strong> Docker, Kubernetes, Terraform</li>
-                    </ul>
-
-                    <h2>Scalability</h2>
-                    <p><strong>Target:</strong> 10,000 concurrent users, 50,000 servers, 1M queries/day, 99.9% uptime</p>
-
-                    <h2>Disaster Recovery</h2>
-                    <p>RTO: 15 minutes. RPO: 5 minutes. Multi-region deployment with 3x redundancy.</p>
-                </div>
-
-                <!-- PRICING -->
-                <div id="tab-3" class="doc-section">
-                    <h1>ANK8 Subscription Tiers</h1>
-                    <p><strong>Detailed Guide to Our Pricing</strong></p>
-
-                    <h2>Quick Comparison</h2>
-                    <table>
-                        <tr>
-                            <th>Feature</th>
-                            <th>INITIATOR</th>
-                            <th>OPERATOR</th>
-                            <th>ARCHITECT</th>
-                            <th>ENTERPRISE</th>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td>$3/mo</td>
-                            <td>$8/mo</td>
-                            <td>$18/mo</td>
-                            <td>$35/mo</td>
-                        </tr>
-                        <tr>
-                            <td>Servers</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>∞</td>
-                        </tr>
-                        <tr>
-                            <td>Support</td>
-                            <td>24-48h</td>
-                            <td>12-24h</td>
-                            <td>4-8h</td>
-                            <td>30min</td>
-                        </tr>
-                    </table>
-
-                    <h2>SIGNAL INITIATOR — $3/month</h2>
-                    <h3>For Complete Beginners</h3>
-                    <p>Accessible entry point for anyone new to VPS management.</p>
-                    <ul>
-                        <li>1 VPS connection</li>
-                        <li>AI guidance (12h/day)</li>
-                        <li>Linux basics module</li>
-                        <li>Command explanations</li>
-                    </ul>
-
-                    <h2>REBOOT OPERATOR — $8/month ⭐</h2>
-                    <h3>For Infrastructure Professionals</h3>
-                    <p>Ready to deploy real projects with professional guidance.</p>
-                    <ul>
-                        <li>2 servers simultaneous</li>
-                        <li>5 specializations</li>
-                        <li>24/7 AI support</li>
-                        <li>API access</li>
-                    </ul>
-
-                    <h2>SIGNAL ARCHITECT — $18/month</h2>
-                    <h3>For Infrastructure Engineers</h3>
-                    <p>Production infrastructure management with scalability.</p>
-                    <ul>
-                        <li>4 servers</li>
-                        <li>Multi-server orchestration</li>
-                        <li>Weekly reviews</li>
-                        <li>Advanced monitoring</li>
-                    </ul>
-
-                    <h2>ANK8 ENTERPRISE — $35/month</h2>
-                    <h3>For Organizations & Teams</h3>
-                    <p>Complete infrastructure mastery for serious operations.</p>
-                    <ul>
-                        <li>Unlimited servers</li>
-                        <li>Dedicated private AI agent</li>
-                        <li>30-minute support</li>
-                        <li>99.5% uptime SLA</li>
-                    </ul>
-
-                    <h2>Special Offers</h2>
-                    <ul>
-                        <li><strong>Early Access:</strong> 50% off first 3 months</li>
-                        <li><strong>Money-Back:</strong> 7-day guarantee</li>
-                        <li><strong>Annual:</strong> 20% discount</li>
-                    </ul>
-                </div>
-
+        <!-- OVERVIEW -->
+        <div id="tab-0" class="doc-section active">
+            <div class="disclaimer-box">
+                <h3>SYSTEM DISCLAIMER // THEORETICAL FRAMEWORK</h3>
+                <p>Please note: The features, timelines, infrastructure services, and subscription tiers described in this documentation represent our theoretical vision and roadmap. While we are absolutely committed to implementing the core concept—an interactive AI-powered server agent that connects to your infrastructure and guides you—specific features, release dates, and scaling promises are subject to change and are not 100% guaranteed to be released exactly as described.</p>
             </div>
+
+            <h1>ANK8 REBOOT SIGNAL CORP</h1>
+            <p><strong>Professional AI-Powered Server Navigation Platform</strong></p>
+
+            <h2>Project Overview</h2>
+            <p>ANK8 is a revolutionary platform designed to bridge the gap between server infrastructure complexity and practical accessibility. We combine cutting-edge AI technology with real-world server management to create a personalized learning experience for infrastructure professionals at any skill level.</p>
+
+            <h2>The Problem We Solve</h2>
+            <p>You just bought a VPS. You're excited. But then reality hits:</p>
+            <ul>
+                <li><strong>Terminal is intimidating</strong> - Complex commands, cryptic error messages</li>
+                <li><strong>Documentation is overwhelming</strong> - Technical, assumes deep knowledge</li>
+                <li><strong>YouTube tutorials are fragmented</strong> - Inconsistent quality, outdated info</li>
+                <li><strong>Communities are chaotic</strong> - Noise, misinformation, slow responses</li>
+                <li><strong>No hands-on experience</strong> - Simulators don't match real production</li>
+            </ul>
+
+            <h2>Our Solution</h2>
+            <p>ANK8 is your personal AI server navigator:</p>
+            <pre>Your VPS + ANK8 Agent = Personalized Guidance + Real Learning</pre>
+            <ul>
+                <li>✅ Connects to YOUR real infrastructure</li>
+                <li>✅ Analyzes YOUR specific configuration</li>
+                <li>✅ Creates YOUR personalized learning path</li>
+                <li>✅ Guides every step with explanations</li>
+                <li>✅ Maintains YOUR complete control</li>
+            </ul>
+
+            <h2>Core Features</h2>
+            <h3>1. Intelligent Server Diagnostics</h3>
+            <ul>
+                <li>Automatic analysis of server's state on connection</li>
+                <li>Performance metrics and security assessment</li>
+                <li>Environment-specific recommendations</li>
+                <li>Real-time status monitoring</li>
+            </ul>
+
+            <h3>2. Personalized Learning Paths</h3>
+            <ul>
+                <li>AI-generated curriculum tailored to your goals</li>
+                <li>Adaptive difficulty progression</li>
+                <li>Specialized tracks for different use cases</li>
+                <li>Flexible pacing and self-directed learning</li>
+            </ul>
+
+            <h3>3. Interactive Terminal Guidance</h3>
+            <ul>
+                <li>Step-by-step command execution with explanations</li>
+                <li>Error handling and troubleshooting</li>
+                <li>Contextual documentation integration</li>
+                <li>Real infrastructure learning</li>
+            </ul>
+
+            <h3>4. Specialization Tracks</h3>
+            <p>Choose your learning focus:</p>
+            <ul>
+                <li><strong>🔐 VPN Architecture</strong> - Secure network infrastructure</li>
+                <li><strong>🤖 Telegram Bot Infrastructure</strong> - Deploy and scale bots</li>
+                <li><strong>🌐 Web Application Deployment</strong> - Host production apps</li>
+                <li><strong>🎮 Game Server Setup</strong> - Configure game infrastructure</li>
+                <li><strong>₿ Cryptocurrency Node Operations</strong> - Run blockchain infrastructure</li>
+            </ul>
+
+            <h3>5. Security-First Design</h3>
+            <ul>
+                <li>Read-only agent model (no autonomous execution)</li>
+                <li>Double-confirmation protocol for all actions</li>
+                <li>Encrypted communication (TLS 1.3)</li>
+                <li>Complete audit logging</li>
+                <li>User-controlled data access</li>
+            </ul>
+
+            <h2>Security & Privacy</h2>
+            <h3>Our Commitment</h3>
+            <p>ANK8 operates on a <strong>zero-autonomous-execution model</strong>:</p>
+            <ol>
+                <li><strong>Read-Only Agent</strong> - Only observes, never executes autonomously</li>
+                <li><strong>User Confirmation</strong> - Every action requires explicit approval</li>
+                <li><strong>Encrypted Communication</strong> - TLS 1.3 end-to-end encryption</li>
+                <li><strong>Audit Logging</strong> - Complete activity history maintained</li>
+                <li><strong>Data Ownership</strong> - You control what ANK8 can access</li>
+            </ol>
+
+            <h2>Learning Methodology</h2>
+            <h3>Pedagogical Approach</h3>
+            <p>ANK8 uses a <strong>guided discovery</strong> model:</p>
+            <ol>
+                <li><strong>Context First</strong> - Understand the "why" before the "how"</li>
+                <li><strong>Real Hands-On</strong> - Work with actual infrastructure, not simulators</li>
+                <li><strong>Progressive Complexity</strong> - Build skills systematically</li>
+                <li><strong>Immediate Application</strong> - Learn by doing on real projects</li>
+                <li><strong>Adaptive Pacing</strong> - Move at your own speed</li>
+            </ol>
+
+            <h2>Vision & Mission</h2>
+            <h3>Vision</h3>
+            <p>A world where server infrastructure is accessible, understandable, and manageable for developers at any skill level.</p>
+
+            <h3>Mission</h3>
+            <p>To democratize infrastructure knowledge by providing AI-powered, personalized, real-world guided learning experiences that respect user autonomy and accelerate professional growth.</p>
         </div>
+
+        <!-- ROADMAP -->
+        <div id="tab-1" class="doc-section">
+            <h1>ANK8 Product Roadmap</h1>
+            <p><strong>Vision for 2026-2027 and Beyond</strong></p>
+
+            <h2>Executive Summary</h2>
+            <p>ANK8 is more than a learning platform—it's the foundation of a complete infrastructure services ecosystem. This document outlines our product vision, planned features, and strategic initiatives for the next 24 months and beyond.</p>
+
+            <h2>Phase 1: Foundation & Launch (2026 Q1)</h2>
+            <p><strong>Public Beta Launch: January - March 2026</strong></p>
+
+            <h3>Core Platform Deployment</h3>
+            <ul>
+                <li>Learning platform infrastructure</li>
+                <li>4 subscription tiers</li>
+                <li>Server agent installation and management</li>
+                <li>Basic server diagnostics and monitoring</li>
+                <li>User dashboard and progress tracking</li>
+                <li>Community forum and peer support</li>
+            </ul>
+
+            <h3>Initial Specializations</h3>
+            <ul>
+                <li><strong>VPN Architecture:</strong> WireGuard/OpenVPN, deployment, troubleshooting</li>
+                <li><strong>Telegram Bot Infrastructure:</strong> Bot API, webhooks, databases</li>
+            </ul>
+
+            <h2>Phase 2: Expansion (2026 Q2-Q3)</h2>
+            <h3>Additional Specializations</h3>
+            <ul>
+                <li><strong>Web Application Deployment</strong> - Nginx, Apache, SSL/TLS</li>
+                <li><strong>Game Server Configuration</strong> - Minecraft, CS2, Rust</li>
+                <li><strong>Crypto Node Operations</strong> - Bitcoin, Ethereum, validators</li>
+            </ul>
+
+            <h3>Managed Hosting Beta (Q3 2026)</h3>
+            <p>ANK8 Managed Infrastructure with pre-configured VPS and integrated learning.</p>
+
+            <h2>Phase 3: Intelligence (2026 Q4)</h2>
+            <ul>
+                <li>Predictive recommendations</li>
+                <li>Automated troubleshooting</li>
+                <li>Infrastructure insights dashboard</li>
+                <li>Automation framework</li>
+            </ul>
+
+            <h2>Phase 4: Enterprise (2027)</h2>
+            <ul>
+                <li>Custom specialization development</li>
+                <li>Managed services expansion</li>
+                <li>Advanced compliance (HIPAA, PCI-DSS)</li>
+            </ul>
+
+            <h2>Phase 5: Ecosystem (2027+)</h2>
+            <ul>
+                <li>Community marketplace</li>
+                <li>User-created specializations</li>
+                <li>Certified expert program</li>
+            </ul>
+
+            <h2>Financial Projections</h2>
+            <h3>2027 Targets</h3>
+            <ul>
+                <li>100,000+ users</li>
+                <li>$1,000,000+ monthly revenue</li>
+                <li>Profitability achieved</li>
+                <li>15+ employees</li>
+            </ul>
+        </div>
+
+        <!-- ARCHITECTURE -->
+        <div id="tab-2" class="doc-section">
+            <h1>ANK8 System Architecture</h1>
+            <p><strong>Technical Overview & Infrastructure Design</strong></p>
+
+            <h2>Core Components</h2>
+
+            <h3>1. Learning Engine</h3>
+            <p>Manages curriculum delivery, tracks user progress, generates recommendations.</p>
+
+            <h3>2. AI Coordination System</h3>
+            <p>Processes queries, provides explanations. Read-only analysis only, no autonomous execution.</p>
+
+            <h3>3. Server Agent</h3>
+            <p>Deployed on user's VPS via: <code>curl -sSL https://install.ankverdict.io/agent | bash</code></p>
+            <p><strong>Can:</strong> Read files, observe commands, analyze configurations</p>
+            <p><strong>Cannot:</strong> Modify files, execute commands, install packages</p>
+
+            <h3>4. Data Storage</h3>
+            <p>User data encrypted at rest with AES-256. Infrastructure data includes hardware specs.</p>
+
+            <h3>5. Audit Logging</h3>
+            <p>Every action logged. 90 days hot storage, 1 year archive, 7 years legal hold.</p>
+
+            <h2>Security Architecture</h2>
+            <h3>Defense-in-Depth</h3>
+            <ul>
+                <li>Layer 1: Network Security (VPC, DDoS protection)</li>
+                <li>Layer 2: Application Security (Input validation)</li>
+                <li>Layer 3: Data Security (AES-256, TLS 1.3)</li>
+                <li>Layer 4: Agent Security (Code signing)</li>
+            </ul>
+
+            <h2>Technology Stack</h2>
+            <ul>
+                <li><strong>Backend:</strong> Python 3.11+, FastAPI, PostgreSQL + Redis</li>
+                <li><strong>Frontend:</strong> React 18+, Redux, Material-UI</li>
+                <li><strong>Agent:</strong> Go (compiled, <10MB)</li>
+                <li><strong>DevOps:</strong> Docker, Kubernetes, Terraform</li>
+            </ul>
+
+            <h2>Scalability</h2>
+            <p><strong>Target:</strong> 10,000 concurrent users, 50,000 servers, 1M queries/day, 99.9% uptime</p>
+
+            <h2>Disaster Recovery</h2>
+            <p>RTO: 15 minutes. RPO: 5 minutes. Multi-region deployment with 3x redundancy.</p>
+        </div>
+
+        <!-- PRICING -->
+        <div id="tab-3" class="doc-section">
+            <h1>ANK8 Subscription Tiers</h1>
+            <p><strong>Detailed Guide to Our Pricing</strong></p>
+
+            <h2>Quick Comparison</h2>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>INITIATOR</th>
+                    <th>OPERATOR</th>
+                    <th>ARCHITECT</th>
+                    <th>ENTERPRISE</th>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>$3/mo</td>
+                    <td>$8/mo</td>
+                    <td>$18/mo</td>
+                    <td>$35/mo</td>
+                </tr>
+                <tr>
+                    <td>Servers</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>∞</td>
+                </tr>
+                <tr>
+                    <td>Support</td>
+                    <td>24-48h</td>
+                    <td>12-24h</td>
+                    <td>4-8h</td>
+                    <td>30min</td>
+                </tr>
+            </table>
+
+            <h2>SIGNAL INITIATOR — $3/month</h2>
+            <h3>For Complete Beginners</h3>
+            <p>Accessible entry point for anyone new to VPS management.</p>
+            <ul>
+                <li>1 VPS connection</li>
+                <li>AI guidance (12h/day)</li>
+                <li>Linux basics module</li>
+                <li>Command explanations</li>
+            </ul>
+
+            <h2>REBOOT OPERATOR — $8/month ⭐</h2>
+            <h3>For Infrastructure Professionals</h3>
+            <p>Ready to deploy real projects with professional guidance.</p>
+            <ul>
+                <li>2 servers simultaneous</li>
+                <li>5 specializations available</li>
+                <li>24/7 AI support</li>
+                <li>API access</li>
+            </ul>
+
+            <h2>SIGNAL ARCHITECT — $18/month</h2>
+            <h3>For Infrastructure Engineers</h3>
+            <p>Production infrastructure management with scalability.</p>
+            <ul>
+                <li>4 servers</li>
+                <li>Multi-server orchestration</li>
+                <li>Weekly reviews</li>
+                <li>Advanced monitoring</li>
+            </ul>
+
+            <h2>ANK8 ENTERPRISE — $35/month</h2>
+            <h3>For Organizations & Teams</h3>
+            <p>Complete infrastructure mastery for serious operations.</p>
+            <ul>
+                <li>Unlimited servers</li>
+                <li>Dedicated private AI agent</li>
+                <li>30-minute support</li>
+                <li>99.5% uptime SLA</li>
+            </ul>
+
+            <h2>Special Offers</h2>
+            <ul>
+                <li><strong>Early Access:</strong> 50% off first 3 months</li>
+                <li><strong>Money-Back:</strong> 7-day guarantee</li>
+                <li><strong>Annual:</strong> 20% discount</li>
+            </ul>
+        </div>
+
     </div>
 
     <script>
         function switchTab(tabIndex) {
             document.querySelectorAll('.doc-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById('tab-' + tabIndex).classList.add('active');
-            document.querySelectorAll('.nav-tab')[tabIndex].classList.add('active');
-            document.querySelector('.content-area').scrollTop = 0;
+            document.querySelectorAll('.nav-item')[tabIndex].classList.add('active');
         }
     </script>
 </body>
